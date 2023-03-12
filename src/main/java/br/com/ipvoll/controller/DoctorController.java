@@ -1,10 +1,7 @@
 package br.com.ipvoll.controller;
 
 
-import br.com.ipvoll.doctor.Doctor;
-import br.com.ipvoll.doctor.DoctorDTO;
-import br.com.ipvoll.doctor.DoctorListDTO;
-import br.com.ipvoll.doctor.DoctorRepository;
+import br.com.ipvoll.doctor.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("doctors")
@@ -29,5 +28,12 @@ public class DoctorController {
     @GetMapping
     public Page<DoctorListDTO> listAllDoctors(@PageableDefault(size=10, sort={"name"}) Pageable pagination) {
         return doctorRepository.findAll(pagination).map(DoctorListDTO::new);
+    }
+
+    @PutMapping
+    @Transactional
+    public void updateDoctor(@RequestBody @Valid DoctorDTOUpdate doctorDTOUpdate) {
+        var doctor = doctorRepository.getReferenceById(doctorDTOUpdate.id());
+        doctor.updateInfo(doctorDTOUpdate);
     }
 }

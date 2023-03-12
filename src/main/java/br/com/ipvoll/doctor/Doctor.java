@@ -36,4 +36,16 @@ public class Doctor {
         this.specialty = doctorDTO.specialty();
         this.address = new Address(doctorDTO.address());
     }
+
+    public void updateInfo(DoctorDTOUpdate doctorDTOUpdate) {
+        if(doctorDTOUpdate.name() != null) {
+            this.name = doctorDTOUpdate.name();
+        }
+        if(doctorDTOUpdate.phonenumber() != null) {
+            this.phonenumber = doctorDTOUpdate.phonenumber();
+        }
+        if(doctorDTOUpdate.address() != null) {
+            this.address.updateInfo(doctorDTOUpdate.address());
+        }
+    }
 }
