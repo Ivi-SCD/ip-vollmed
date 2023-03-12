@@ -1,0 +1,1 @@
+UPDATE doctors SET phonenumber = '0000000000000' WHERE phonenumber IS NULL;
