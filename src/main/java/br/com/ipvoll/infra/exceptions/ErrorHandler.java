@@ -1,4 +1,4 @@
-package br.com.ipvoll.domain.infra;
+package br.com.ipvoll.infra.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
