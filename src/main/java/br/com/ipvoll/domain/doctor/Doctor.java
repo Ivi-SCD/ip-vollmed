@@ -1,6 +1,6 @@
-package br.com.ipvoll.doctor;
+package br.com.ipvoll.domain.doctor;
 
-import br.com.ipvoll.address.Address;
+import br.com.ipvoll.domain.address.Address;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

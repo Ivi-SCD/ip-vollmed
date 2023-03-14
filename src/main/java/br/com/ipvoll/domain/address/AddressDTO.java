@@ -1,4 +1,4 @@
-package br.com.ipvoll.address;
+package br.com.ipvoll.domain.address;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

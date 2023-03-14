@@ -1,4 +1,4 @@
-package br.com.ipvoll.patient;
+package br.com.ipvoll.domain.patient;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,6 +1,6 @@
-package br.com.ipvoll.doctor;
+package br.com.ipvoll.domain.doctor;
 
-import br.com.ipvoll.address.Address;
+import br.com.ipvoll.domain.address.Address;
 
 public record DoctorDTODetaild(Long id, String name, String email, String crm, Specialty specialty, Address address) {
 

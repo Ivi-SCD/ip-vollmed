@@ -1,8 +1,7 @@
-package br.com.ipvoll.address;
+package br.com.ipvoll.domain.address;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

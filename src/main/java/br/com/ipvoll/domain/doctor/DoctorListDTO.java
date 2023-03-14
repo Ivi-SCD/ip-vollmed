@@ -1,4 +1,4 @@
-package br.com.ipvoll.doctor;
+package br.com.ipvoll.domain.doctor;
 
 public record DoctorListDTO(Long id, String name, String email, String crm, Specialty specialty) {
 

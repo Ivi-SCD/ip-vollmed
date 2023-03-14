@@ -1,4 +1,4 @@
-package br.com.ipvoll.patient;
+package br.com.ipvoll.domain.patient;
 
 public record PatientListDTO(Long id, String name, String email, String ssn) {
 

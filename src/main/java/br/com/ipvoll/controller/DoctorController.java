@@ -1,7 +1,10 @@
 package br.com.ipvoll.controller;
 
 
-import br.com.ipvoll.doctor.*;
+import br.com.ipvoll.domain.doctor.*;
+import br.com.ipvoll.domain.doctor.Doctor;
+import br.com.ipvoll.domain.doctor.DoctorListDTO;
+import br.com.ipvoll.domain.doctor.DoctorRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

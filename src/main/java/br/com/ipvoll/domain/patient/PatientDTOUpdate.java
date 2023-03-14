@@ -1,6 +1,6 @@
-package br.com.ipvoll.patient;
+package br.com.ipvoll.domain.patient;
 
-import br.com.ipvoll.address.AddressDTO;
+import br.com.ipvoll.domain.address.AddressDTO;
 import jakarta.validation.Valid;
 public record PatientDTOUpdate(
 

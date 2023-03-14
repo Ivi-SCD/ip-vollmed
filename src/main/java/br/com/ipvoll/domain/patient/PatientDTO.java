@@ -1,6 +1,6 @@
-package br.com.ipvoll.patient;
+package br.com.ipvoll.domain.patient;
 
-import br.com.ipvoll.address.AddressDTO;
+import br.com.ipvoll.domain.address.AddressDTO;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -8,17 +8,17 @@ import jakarta.validation.constraints.NotNull;
 
 public record PatientDTO(
 
-    @NotBlank
+    @NotBlank(message = "{required.name}")
     String name,
-    @NotBlank
-    @Email
+    @NotBlank(message = "{required.email}")
+    @Email(message = "{invalid.email}")
     String email,
-    @NotBlank
+    @NotBlank(message = "{required.phonenumber}")
     String phonenumber,
-    @NotBlank
+    @NotBlank(message = "{required.ssn}")
 //    @Pattern(regexp = "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$")
     String ssn,
-    @NotNull
+    @NotNull(message = "{required.address}")
     @Valid
     AddressDTO address) {
 }
