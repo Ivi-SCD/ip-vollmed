@@ -1,6 +1,9 @@
 package br.com.ipvoll.controller;
 
 import br.com.ipvoll.domain.user.AuthenticatorDTO;
+import br.com.ipvoll.domain.user.User;
+import br.com.ipvoll.infra.security.TokenJWTDTO;
+import br.com.ipvoll.infra.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +21,17 @@ public class AuthenticatorController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @PostMapping
-    public ResponseEntity doLogin(@RequestBody @Valid AuthenticatorDTO authenticatorDTO) {
-        var token = new UsernamePasswordAuthenticationToken(authenticatorDTO.login(), authenticatorDTO.password());
-        var authentication = authenticationManager.authenticate(token);
+    @Autowired
+    private TokenService tokenService;
 
-        return ResponseEntity.ok().build();
+    @PostMapping
+    public ResponseEntity<TokenJWTDTO> doLogin(@RequestBody @Valid AuthenticatorDTO authenticatorDTO) {
+        var authenticationToken = new UsernamePasswordAuthenticationToken(authenticatorDTO.login(), authenticatorDTO.password());
+        var authentication = authenticationManager.authenticate(authenticationToken);
+
+        var tokenJWT = tokenService.createToken((User) authentication.getPrincipal());
+
+
+        return ResponseEntity.ok(new TokenJWTDTO(tokenJWT));
     }
 }
