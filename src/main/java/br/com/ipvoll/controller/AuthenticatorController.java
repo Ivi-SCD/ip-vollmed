@@ -26,6 +26,7 @@ public class AuthenticatorController {
 
     @PostMapping
     public ResponseEntity<TokenJWTDTO> doLogin(@RequestBody @Valid AuthenticatorDTO authenticatorDTO) {
+
         var authenticationToken = new UsernamePasswordAuthenticationToken(authenticatorDTO.login(), authenticatorDTO.password());
         var authentication = authenticationManager.authenticate(authenticationToken);
 

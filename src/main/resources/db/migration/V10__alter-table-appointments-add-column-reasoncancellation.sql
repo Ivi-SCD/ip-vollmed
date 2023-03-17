@@ -1,0 +1,1 @@
+ALTER TABLE appointments ADD COLUMN reason_cancellation VARCHAR(100);
