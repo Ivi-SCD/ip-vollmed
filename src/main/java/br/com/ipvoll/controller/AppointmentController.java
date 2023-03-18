@@ -20,8 +20,8 @@ public class AppointmentController {
     @PostMapping
     @Transactional
     public ResponseEntity<AppointmentDTODetaild> toSchedule(@RequestBody @Valid AppointmentDTO appointmentDTO) {
-        appointmentSchedule.toSchedule(appointmentDTO);
-        return ResponseEntity.ok(new AppointmentDTODetaild(null, null, null, null));
+        var appointmentDTOdetaild = appointmentSchedule.toSchedule(appointmentDTO);
+        return ResponseEntity.ok(appointmentDTOdetaild);
     }
 
     @DeleteMapping

@@ -1,5 +1,6 @@
 package br.com.ipvoll.infra.exceptions;
 
+import br.com.ipvoll.domain.ValidationException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -22,6 +23,11 @@ public class ErrorHandler {
         var errors = ex.getFieldErrors();
 
         return ResponseEntity.badRequest().body(errors.stream().map(ErrorDataValidation::new).toList());
+    }
+
+    @ExceptionHandler(value = ValidationException.class)
+    public ResponseEntity<String> businessRuleError(ValidationException ex) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
     private record ErrorDataValidation(String field, String message){

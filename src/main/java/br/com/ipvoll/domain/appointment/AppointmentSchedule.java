@@ -1,11 +1,14 @@
 package br.com.ipvoll.domain.appointment;
 
 import br.com.ipvoll.domain.ValidationException;
+import br.com.ipvoll.domain.appointment.validations.ValidatorAppointmentSchedule;
 import br.com.ipvoll.domain.doctor.Doctor;
 import br.com.ipvoll.domain.doctor.DoctorRepository;
 import br.com.ipvoll.domain.patient.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -20,7 +23,10 @@ public class AppointmentSchedule {
     @Autowired
     private PatientRepository patientRepository;
 
-    public void toSchedule(AppointmentDTO appointmentDTO) {
+    @Autowired
+    private List<ValidatorAppointmentSchedule> validators;
+
+    public AppointmentDTODetaild toSchedule(AppointmentDTO appointmentDTO) {
 
         if(!patientRepository.existsById(appointmentDTO.idPatient())) {
             throw new ValidationException("Id of patient does not exist.");
@@ -29,13 +35,21 @@ public class AppointmentSchedule {
         if(appointmentDTO.idDoctor() != null && !doctorRepository.existsById(appointmentDTO.idDoctor())) {
             throw new ValidationException("Id of doctor does not exist.");
         }
-        
+
+        validators.forEach(v -> v.validate(appointmentDTO));
+
         var patient = patientRepository.getReferenceById(appointmentDTO.idPatient());
         var doctor = chooseDoctor(appointmentDTO);
+
+        if(doctor == null) {
+            throw new ValidationException("Doctor does not able in this date");
+        }
 
         var appointment = new Appointment(null, doctor, patient, appointmentDTO.date(), null);
 
         appointmentRepository.save(appointment);
+
+        return new AppointmentDTODetaild(appointment);
     }
 
     private Doctor chooseDoctor(AppointmentDTO appointmentDTO) {
@@ -46,6 +60,7 @@ public class AppointmentSchedule {
         if(appointmentDTO.specialty() == null) {
             throw new ValidationException("Specialty is mandatory when the doctor is not chosen");
         }
+
 
         return doctorRepository.chooseRandomDoctorFreenOnDate(appointmentDTO.specialty(), appointmentDTO.date());
 
