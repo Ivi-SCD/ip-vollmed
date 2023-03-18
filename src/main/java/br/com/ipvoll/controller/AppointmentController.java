@@ -4,6 +4,7 @@ import br.com.ipvoll.domain.appointment.AppointmentDTO;
 import br.com.ipvoll.domain.appointment.AppointmentDTOCancellation;
 import br.com.ipvoll.domain.appointment.AppointmentDTODetaild;
 import br.com.ipvoll.domain.appointment.AppointmentSchedule;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("appointment")
+@SecurityRequirement(name="bearer-key")
 public class AppointmentController {
 
     @Autowired

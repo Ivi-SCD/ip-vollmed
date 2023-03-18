@@ -32,7 +32,6 @@ public class AuthenticatorController {
 
         var tokenJWT = tokenService.createToken((User) authentication.getPrincipal());
 
-
         return ResponseEntity.ok(new TokenJWTDTO(tokenJWT));
     }
 }

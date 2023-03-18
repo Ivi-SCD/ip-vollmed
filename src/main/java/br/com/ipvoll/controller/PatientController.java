@@ -4,6 +4,7 @@ import br.com.ipvoll.domain.patient.Patient;
 import br.com.ipvoll.domain.patient.PatientListDTO;
 import br.com.ipvoll.domain.patient.PatientRepository;
 import br.com.ipvoll.domain.patient.*;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("patients")
+@SecurityRequirement(name="bearer-key")
 public class PatientController {
 
     @Autowired
